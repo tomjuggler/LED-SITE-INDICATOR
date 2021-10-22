@@ -74,17 +74,17 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 
 			add_settings_section(
 				'led_site_indicator_event_settings', // ID
-				__( 'Common events', 'led-site-indicator' ), // Title
+				__( 'MQTT topic - default is user/LED for free version', 'led-site-indicator' ), // Title
 				array( $this, 'print_event_section_info' ), // Callback
 				'led-site-indicator-settings' // Page
 			);
 
-			add_settings_section(
-				'led_site_indicator_custom_events', // ID
-				__( 'Custom events', 'led-site-indicator' ), // Title
-				array( $this, 'print_custom_events_section_info' ), // Callback
-				'led-site-indicator-settings' // Page
-			);
+			// add_settings_section(
+			// 	'led_site_indicator_custom_events', // ID
+			// 	__( 'Custom events', 'led-site-indicator' ), // Title
+			// 	array( $this, 'print_custom_events_section_info' ), // Callback
+			// 	'led-site-indicator-settings' // Page
+			// );
 
 			$this->fields = array(
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_url', 'label'=>__('Broker URL', 'led-site-indicator' ), 'callback'=>'broker_url_callback' ),
@@ -93,14 +93,14 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_client_id', 'label'=>__('Client ID', 'led-site-indicator' ), 'callback'=>'broker_client_id_callback' ),
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_username', 'label'=>__('Username', 'led-site-indicator' ), 'callback'=>'broker_username_callback' ),
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_password', 'label'=>__('Password', 'led-site-indicator' ), 'callback'=>'broker_password_callback' ),
-				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_pageview', 'label'=>__('Pageview', 'led-site-indicator' ), 'callback'=>'event_callback' ),
-				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_login', 'label'=>__('User login', 'led-site-indicator' ), 'callback'=>'event_callback' ),
-				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_login_failed', 'label'=>__('Failed user login', 'led-site-indicator' ), 'callback'=>'event_callback' ),
-				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_new_post', 'label'=>__('Post published', 'led-site-indicator' ), 'callback'=>'event_callback' ),
-				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_new_page', 'label'=>__('Page published', 'led-site-indicator' ), 'callback'=>'event_callback' ),
-				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_new_comment', 'label'=>__('New comment', 'led-site-indicator' ), 'callback'=>'event_callback' ),
-				array( 'section'=>'led_site_indicator_custom_events', 'id'=>'custom_events_enable', 'label'=>__('Enable custom events', 'led-site-indicator' ), 'callback'=>'custom_events_enable_callback' ),
-				array( 'section'=>'led_site_indicator_custom_events', 'id'=>'custom_events', 'label'=>__('Custom events', 'led-site-indicator' ), 'callback'=>'custom_events_callback' ),
+				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_pageview', 'label'=>__('user/Colour', 'led-site-indicator' ), 'callback'=>'event_callback' ),
+				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_login', 'label'=>__('User login', 'led-site-indicator' ), 'callback'=>'event_callback' ),
+				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_login_failed', 'label'=>__('Failed user login', 'led-site-indicator' ), 'callback'=>'event_callback' ),
+				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_new_post', 'label'=>__('Post published', 'led-site-indicator' ), 'callback'=>'event_callback' ),
+				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_new_page', 'label'=>__('Page published', 'led-site-indicator' ), 'callback'=>'event_callback' ),
+				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_new_comment', 'label'=>__('New comment', 'led-site-indicator' ), 'callback'=>'event_callback' ),
+				// array( 'section'=>'led_site_indicator_custom_events', 'id'=>'custom_events_enable', 'label'=>__('Enable custom events', 'led-site-indicator' ), 'callback'=>'custom_events_enable_callback' ),
+				// array( 'section'=>'led_site_indicator_custom_events', 'id'=>'custom_events', 'label'=>__('Custom events', 'led-site-indicator' ), 'callback'=>'custom_events_callback' ),
 			);
 
 			foreach( $this->fields as $field ){
@@ -197,7 +197,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 * Print the Section text
 		 */
 		public function print_event_section_info(){
-			print __( 'Select common WordPress events that should trigger MQTT messages', 'led-site-indicator' );
+			print __( 'MQTT password and colour input', 'led-site-indicator' );
 		}
 
 		/** 
@@ -280,7 +280,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 			$event = isset( $this->current_settings[ $event_name ] ) ? $this->current_settings[ $event_name ] : array( 'checkbox'=>false, 'subject'=>__( 'subject', 'led-site-indicator' ), 'message'=>__( 'message', 'led-site-indicator' ) );
 			echo '<input id="' . $event_name . '_checkbox" name="led_site_indicator_settings[' . $event_name . '][checkbox]" type="checkbox" value="true" ' . checked( $event['checkbox'], true, false ) . ' />&nbsp;';
 			echo '<input id="' . $event_name . '_subject" name="led_site_indicator_settings[' . $event_name . '][subject]" size="30" type="text" value="' . $event['subject'] . '" />&nbsp;';
-			echo '<input id="' . $event_name . '_message" name="led_site_indicator_settings[' . $event_name . '][message]" size="90" type="text" value="' . $event['message'] . '" />';
+			// echo '<input id="' . $event_name . '_message" name="led_site_indicator_settings[' . $event_name . '][message]" size="90" type="text" value="' . $event['message'] . '" />';
 		}
 
 
