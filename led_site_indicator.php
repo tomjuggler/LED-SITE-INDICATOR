@@ -5,7 +5,7 @@
 	Description: Send MQTT messages from WordPress to light up an internet connected LED
 	Version:     1.1
 	Author:      Roy Tanck, Tom Hastings
-	Author URI:  https://ledindicator.devsoft.co.za
+	Author URI:  https://circusscientist.com
 	Text Domain: led-site-indicator
 	Domain path: /languages
 	License:     GPL
