@@ -212,7 +212,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 */
 		function broker_url_callback() { 
 			$current_setting = isset( $this->current_settings['broker_url'] ) ? $this->current_settings['broker_url'] : 'ledmqtt.devsoft.co.za';
-			echo '<input id="broker_url" name="led_site_indicator_settings[broker_url]" size="60" type="text" value="' . $current_setting . '" />';
+			echo '<input id="broker_url" name="led_site_indicator_settings[broker_url]" size="60" type="text" value="' . esc_attr( $current_setting ) . '" />';
 		}
 
 		/** 
@@ -220,7 +220,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 */
 		function broker_port_callback() { 
 			$current_setting = isset( $this->current_settings['broker_port'] ) ? $this->current_settings['broker_port'] : 1883;
-			echo '<input id="broker_port" name="led_site_indicator_settings[broker_port]" size="6" type="text" value="' . $current_setting . '" />';
+			echo '<input id="broker_port" name="led_site_indicator_settings[broker_port]" size="6" type="text" value="' . esc_attr ($current_setting ). '" />';
 		}
 
 		/** 
@@ -235,7 +235,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 			);
 			echo '<select id="broker_qos" name="led_site_indicator_settings[broker_qos]" >';
 			foreach( $qos_options as $qos ){
-				echo '<option value="' . $qos['value'] . '" ' . selected( $qos['value'], $current_setting, false ) . '>' . $qos['label'] . '</option>';
+				echo '<option value="' . esc_attr ($qos['value']) . '" ' . selected( esc_attr ($qos['value']) , esc_attr ($current_setting) , false ) . '>' . esc_attr ($qos['label']) . '</option>';
 			}
 			echo '</select>';
 		}
@@ -245,7 +245,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 */
 		function broker_client_id_callback() {
 			$current_setting = ( isset( $this->current_settings['broker_client_id'] ) && !empty( $this->current_settings['broker_client_id'] ) ) ? $this->current_settings['broker_client_id'] : $this->generate_default_client_id();
-			echo '<input id="broker_client_id" name="led_site_indicator_settings[broker_client_id]" size="60" type="text" value="' . $current_setting . '" />';
+			echo '<input id="broker_client_id" name="led_site_indicator_settings[broker_client_id]" size="60" type="text" value="' . esc_attr ($current_setting) . '" />';
 		}
 
 		/** 
@@ -253,7 +253,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 */
 		function broker_username_callback() {
 			$current_setting = isset( $this->current_settings['broker_username'] ) ? $this->current_settings['broker_username'] : '';
-			echo '<input id="broker_username" name="led_site_indicator_settings[broker_username]" size="30" type="text" value="' . $current_setting . '" />';
+			echo '<input id="broker_username" name="led_site_indicator_settings[broker_username]" size="30" type="text" value="' . esc_attr ($current_setting) . '" />';
 		}
 
 		/** 
@@ -261,7 +261,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 */
 		function broker_password_callback() {
 			$current_setting = isset( $this->current_settings['broker_password'] ) ? $this->current_settings['broker_password'] : '';
-			echo '<input id="broker_password" name="led_site_indicator_settings[broker_password]" size="30" type="password" value="' . $current_setting . '" />';
+			echo '<input id="broker_password" name="led_site_indicator_settings[broker_password]" size="30" type="password" value="' . esc_attr ($current_setting) . '" />';
 		}
 
 		/** 
@@ -278,8 +278,8 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 */
 		function render_event_fields( $event_name ){
 			$event = isset( $this->current_settings[ $event_name ] ) ? $this->current_settings[ $event_name ] : array( 'checkbox'=>false, 'subject'=>__( 'subject', 'led-site-indicator' ), 'message'=>__( 'message', 'led-site-indicator' ) );
-			echo '<input id="' . $event_name . '_checkbox" name="led_site_indicator_settings[' . $event_name . '][checkbox]" type="checkbox" value="true" ' . checked( $event['checkbox'], true, false ) . ' />&nbsp;';
-			echo '<input id="' . $event_name . '_subject" name="led_site_indicator_settings[' . $event_name . '][subject]" size="30" type="text" value="' . $event['subject'] . '" />&nbsp;';
+			echo '<input id="' . esc_attr ($event_name) . '_checkbox" name="led_site_indicator_settings[' . esc_attr ($event_name) . '][checkbox]" type="checkbox" value="true" ' . checked( esc_attr ($event['checkbox']), true, false ) . ' />&nbsp;';
+			echo '<input id="' . esc_attr ($event_name) . '_subject" name="led_site_indicator_settings[' . esc_attr ($event_name) . '][subject]" size="30" type="text" value="' . esc_attr ($event['subject']) . '" />&nbsp;';
 			// echo '<input id="' . $event_name . '_message" name="led_site_indicator_settings[' . $event_name . '][message]" size="90" type="text" value="' . $event['message'] . '" />';
 		}
 
@@ -289,7 +289,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 */
 		function custom_events_enable_callback() { 
 			$current_setting = ( isset( $this->current_settings['custom_events_enable'] ) && $this->current_settings['custom_events_enable'] == true );
-			echo '<input id="custom_events_enable" name="led_site_indicator_settings[custom_events_enable]" type="checkbox" value="true" ' . checked( $current_setting, true, false ) . ' />';
+			echo '<input id="custom_events_enable" name="led_site_indicator_settings[custom_events_enable]" type="checkbox" value="true" ' . checked( esc_attr ($current_setting), true, false ) . ' />';
 			echo '<label for="custom_events_enable">' . __( "I know what I'm doing, enable custom events", 'led-site-indicator' ) . '</label>';
 		}
 
@@ -301,11 +301,11 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 			if( isset( $this->current_settings['custom_events'] ) && is_array( $this->current_settings['custom_events'] ) ){
 				foreach( $this->current_settings['custom_events'] as $key => $event ){
 					$i = intval( $key );
-					echo '<div class="led-site-indicator-custom-event" id="led-site-indicator-custom_event-' . $i . '">';
-					echo '<input id="custom_event_' . $i . '_checkbox" name="led_site_indicator_settings[custom_events][' . $i . '][checkbox]" type="checkbox" value="true" ' . checked( $event['checkbox'], true, false ) . ' />&nbsp;';
-					echo '<input id="custom_event_' . $i . '_hook" name="led_site_indicator_settings[custom_events][' . $i . '][hook]" size="20" type="text" value="' . $event['hook'] . '" />&nbsp;';
-					echo '<input id="custom_event_' . $i . '_subject" name="led_site_indicator_settings[custom_events][' . $i . '][subject]" size="20" type="text" value="' . $event['subject'] . '" />&nbsp;';
-					echo '<input id="custom_event_' . $i . '_message" name="led_site_indicator_settings[custom_events][' . $i . '][message]" size="80" type="text" value="' . $event['message'] . '" />&nbsp;';
+					echo '<div class="led-site-indicator-custom-event" id="led-site-indicator-custom_event-' . esc_attr ($i) . '">';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_checkbox" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][checkbox]" type="checkbox" value="true" ' . checked( $event['checkbox'], true, false ) . ' />&nbsp;';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_hook" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][hook]" size="20" type="text" value="' . $event['hook'] . '" />&nbsp;';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_subject" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][subject]" size="20" type="text" value="' . $event['subject'] . '" />&nbsp;';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_message" name="led_site_indicator_settings[custom_events][' .esc_attr ( $i) . '][message]" size="80" type="text" value="' . $event['message'] . '" />&nbsp;';
 					echo '<a href="#" class="led-site-indicator-delete-custom-event button"><span class="dashicons dashicons-no" style="line-height: inherit;"></span></a>';
 					echo '</div>';
 				}
