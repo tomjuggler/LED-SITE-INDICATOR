@@ -302,10 +302,10 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 				foreach( $this->current_settings['custom_events'] as $key => $event ){
 					$i = intval( $key );
 					echo '<div class="led-site-indicator-custom-event" id="led-site-indicator-custom_event-' . esc_attr ($i) . '">';
-					echo '<input id="custom_event_' . esc_attr ($i) . '_checkbox" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][checkbox]" type="checkbox" value="true" ' . checked( $event['checkbox'], true, false ) . ' />&nbsp;';
-					echo '<input id="custom_event_' . esc_attr ($i) . '_hook" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][hook]" size="20" type="text" value="' . $event['hook'] . '" />&nbsp;';
-					echo '<input id="custom_event_' . esc_attr ($i) . '_subject" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][subject]" size="20" type="text" value="' . $event['subject'] . '" />&nbsp;';
-					echo '<input id="custom_event_' . esc_attr ($i) . '_message" name="led_site_indicator_settings[custom_events][' .esc_attr ( $i) . '][message]" size="80" type="text" value="' . $event['message'] . '" />&nbsp;';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_checkbox" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][checkbox]" type="checkbox" value="true" ' . checked( esc_attr ($event['checkbox']), true, false ) . ' />&nbsp;';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_hook" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][hook]" size="20" type="text" value="' . esc_attr ($event['hook']) . '" />&nbsp;';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_subject" name="led_site_indicator_settings[custom_events][' . esc_attr ($i) . '][subject]" size="20" type="text" value="' . esc_attr ($event['subject']) . '" />&nbsp;';
+					echo '<input id="custom_event_' . esc_attr ($i) . '_message" name="led_site_indicator_settings[custom_events][' .esc_attr ( $i) . '][message]" size="80" type="text" value="' . esc_attr ($event['message']) . '" />&nbsp;';
 					echo '<a href="#" class="led-site-indicator-delete-custom-event button"><span class="dashicons dashicons-no" style="line-height: inherit;"></span></a>';
 					echo '</div>';
 				}
