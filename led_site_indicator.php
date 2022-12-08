@@ -3,8 +3,8 @@
 	Plugin Name: LED-Site-Indicator
 	Plugin URI:  https://ledindicator.devsoft.co.za
 	Description: Send MQTT messages from WordPress to light up an internet connected LED
-	Version:     1.1
-	Author:      Roy Tanck, Tom Hastings
+	Version:     1.2.3
+	Author:      Tom Hastings
 	Author URI:  https://circusscientist.com
 	Text Domain: led-site-indicator
 	Domain path: /languages

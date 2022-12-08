@@ -1,15 +1,18 @@
 === LED-SITE-INDICATOR ===
-Contributors: roytanck, tomjuggler
+Contributors: tomjuggler
 Tags: MQTT, IoT, internet-of-things
 Requires at least: 4.4
 Tested up to: 5.8.1
-Stable tag: 1.1
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 LED-SITE-INDICATOR connects WordPress to the Internet of Things. Use this plugin to automatically send MQTT messages when something happens on your website.
 
+LED-SITE-INDICATOR does not work on PHP8 or higher - currently the code is being upgraded to be compatible. 
+
 == Description ==
+Please note that currently LED-SITE-INDICATOR does not work on PHP8 or higher - the code is being upgraded to be compatible. 
 
 Setting up LED-SITE-INDICATOR is easy. Simply supply your MQTT broker's details and configure which WordPress events should trigger messages.
 
@@ -26,7 +29,6 @@ Other events can be added using the "custom events" section. This allows you to 
 
 = Credits =
 * LED-SITE-INDICATOR uses [phpMQTT]:http://github.com/bluerhinos/phpMQTT by Andrew Milsted.
-* Thanks to [Peter Martin]:https://twitter.com/pe7er for his inspirational talk at WordCamp NL 2016.
 * Based on original WP-MQTT plugin by roytanck: https://github.com/roytanck/WP-MQTT
 
 == Installation ==
@@ -43,6 +45,7 @@ I'm sorry, but no. This plugin's purpose is to send messages to a broker, not th
 MQTT subject would require WordPress to remain active continuously, instead of running only when pages are being served.
 
 = Will this slow down my site? =
+YES, if your site uses PHP8+ 
 
 LED-SITE-INDICATOR does it's very best to only connect to the broker when needed, so it depends on the messages you configure.
 Sending messages on events that occur very often may slow down your site. But MQTT itself was designed to have a very
@@ -58,6 +61,13 @@ look into them.
 1. PW-MQTT's settings screen contains the broker settings, allows you to set up common events, or specify your own.
 
 == Changelog ==
+= 2.0 =
+2023
+COMING SOON! PHP8 compatibility upgrade
+
+= 1.2 =
+2022-01-06
+Updated some images and some readme notes
 
 = 1.1 =
 2021-10-01
