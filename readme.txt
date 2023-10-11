@@ -3,7 +3,7 @@ Contributors: tomjuggler
 Tags: MQTT, IoT, internet-of-things
 Requires at least: 4.4
 Tested up to: 5.8.1
-Stable tag: 1.2.3
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,6 +12,7 @@ LED-SITE-INDICATOR connects WordPress to the Internet of Things. Use this plugin
 LED-SITE-INDICATOR does not work on PHP8 or higher - currently the code is being upgraded to be compatible. 
 
 == Description ==
+This Plugin is currently being upgraded - Please be patient. 
 Please note that currently LED-SITE-INDICATOR does not work on PHP8 or higher - the code is being upgraded to be compatible. 
 
 Setting up LED-SITE-INDICATOR is easy. Simply supply your MQTT broker's details and configure which WordPress events should trigger messages.
