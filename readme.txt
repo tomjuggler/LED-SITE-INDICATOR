@@ -13,8 +13,7 @@ LED-SITE-INDICATOR does not work on PHP8 or higher - currently the code is being
 
 == Description ==
 This Plugin is currently being upgraded - Please be patient. 
-Please note that currently LED-SITE-INDICATOR does not work on PHP8 or higher - the code is being upgraded to be compatible. 
-
+ 
 Setting up LED-SITE-INDICATOR is easy. Simply supply your MQTT broker's details and configure which WordPress events should trigger messages.
 
 A number of events are predefined. Simply check the right checkbox and fill in the message's subject and text.
