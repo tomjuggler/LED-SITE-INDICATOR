@@ -93,7 +93,7 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_client_id', 'label'=>__('Client ID', 'led-site-indicator' ), 'callback'=>'broker_client_id_callback' ),
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_username', 'label'=>__('Username', 'led-site-indicator' ), 'callback'=>'broker_username_callback' ),
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_password', 'label'=>__('Password', 'led-site-indicator' ), 'callback'=>'broker_password_callback' ),
-				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_pageview', 'label'=>__('user/Colour', 'led-site-indicator' ), 'callback'=>'event_callback' ),
+				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_pageview', 'label'=>__('Colour', 'led-site-indicator' ), 'callback'=>'event_callback' ),
 				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_login', 'label'=>__('User login', 'led-site-indicator' ), 'callback'=>'event_callback' ),
 				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_login_failed', 'label'=>__('Failed user login', 'led-site-indicator' ), 'callback'=>'event_callback' ),
 				// array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_new_post', 'label'=>__('Post published', 'led-site-indicator' ), 'callback'=>'event_callback' ),
