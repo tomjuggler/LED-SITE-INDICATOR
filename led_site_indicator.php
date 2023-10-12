@@ -15,7 +15,7 @@
 if( !defined('ABSPATH') ){ exit; }
 
 // require the phpMQTT library
-require_once( 'lib/vendor/phpMQTT/phpMQTT.php' );
+// require_once( 'lib/vendor/phpMQTT/phpMQTT.php' );
 
 // require the setting page
 require_once( 'inc/led-site-indicator-settings.php' );
@@ -30,8 +30,8 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 
 		public $client_id = 'led-site-indicator';
 		public $settings = null;
-		public $mqtt = null;
-		public $connected = false;
+		// public $mqtt = null;
+		// public $connected = false;
 
 		/**
 		 * Constructor
@@ -96,7 +96,7 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 										$subject = $custom_event['subject'];
 										$message = $custom_event['message'];
 										// publish the message
-										$this->publish( $subject, $message );
+										// $this->publish( $subject, $message );
 									}
 									// this could be a filter action, so return the first argument
 									if( $arg ){
@@ -133,12 +133,12 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 		 * Connect to the MQTT broker (if mor already connected)
 		 */
 		public function connect(){
-			if( $this->mqtt == null ){
-				$this->mqtt = new phpMQTT( $this->settings['broker_url'], $this->settings['broker_port'], $this->settings['broker_client_id'] );
-				if( $this->mqtt->connect( true, null, $this->settings['broker_username'], $this->settings['broker_password'] ) ){
-					$this->connected = true;
-				}
-			}
+			// if( $this->mqtt == null ){
+			// 	$this->mqtt = new phpMQTT( $this->settings['broker_url'], $this->settings['broker_port'], $this->settings['broker_client_id'] );
+			// 	if( $this->mqtt->connect( true, null, $this->settings['broker_username'], $this->settings['broker_password'] ) ){
+			// 		$this->connected = true;
+			// 	}
+			// }
 		}
 
 
@@ -146,9 +146,9 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 		 * Close the connection just before WordPress shuts down
 		 */
 		public function close_connection(){
-			if( $this->connected ){
-				$this->mqtt->close();
-			}
+			// if( $this->connected ){
+			// 	$this->mqtt->close();
+			// }
 		}
 
 
@@ -157,35 +157,64 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 		 */
 		public function publish( $subject, $message ){
 			// apply filters to the subject
-			$subject = apply_filters( 'wp_mqtt_filter_subject', $subject, $message );
-			// apply filters to the message
-			$message = apply_filters( 'wp_mqtt_filter_message', $message, $subject );
-			// attempt to connect to the broker
-			$this->connect();
-			// check if the connection was made
-			if( $this->connected ){
-				// publish the message
-				$this->mqtt->publish( $subject, $message, $this->settings['broker_qos'] );
-			}			
+			// $subject = apply_filters( 'wp_mqtt_filter_subject', $subject, $message );
+			// // apply filters to the message
+			// $message = apply_filters( 'wp_mqtt_filter_message', $message, $subject );
+			// // attempt to connect to the broker
+			// $this->connect();
+			// // check if the connection was made
+			// if( $this->connected ){
+			// 	// publish the message
+			// 	$this->mqtt->publish( $subject, $message, $this->settings['broker_qos'] );
+			// }			
 		}
 
 
-		public function event_pageview(){
-			$subject = isset( $this->settings['event_pageview']['subject'] ) ? $this->settings['event_pageview']['subject'] : 'default';
-			$message = isset( $this->settings['event_pageview']['message'] ) ? $this->settings['event_pageview']['message'] : 'default';
-			$this->publish( $subject, $message );
+		// public function event_pageview(){
+		// 	$subject = isset( $this->settings['event_pageview']['subject'] ) ? $this->settings['event_pageview']['subject'] : 'default';
+		// 	$message = isset( $this->settings['event_pageview']['message'] ) ? $this->settings['event_pageview']['message'] : 'default';
+		// 	$this->publish( $subject, $message );
+		// }
+
+		//this function should send a get request with user and password. Should work? 
+		// todo: endpoint should come from settings. 
+		public function event_pageview() {
+			$endpoint = 'https://ledindicator.devsoft.co.za/api/ledindicatorrequest';
+			$username = urlencode($this->settings['broker_username']);
+			$password = urlencode($this->settings['broker_password']);
+			// $colour = 'CYAN';
+			$colour = isset( $this->settings['event_pageview']['subject'] ) ? $this->settings['event_pageview']['subject'] : 'default';
+			
+			// Prepare the URL with credentials as query parameters
+			$url = $endpoint . "?username={$username}&password={$password}&colour={$colour}";
+		
+			// Send a GET request to the URL
+			$response = wp_remote_get($url);
+		
+			// Check for a successful response
+			if (is_wp_error($response)) {
+				error_log('Failed to send GET request: ' . $response->get_error_message());
+			} else {
+				$response_code = wp_remote_retrieve_response_code($response);
+				if ($response_code === 200) {
+					// Successful request
+					// You can process the response or take further action here
+				} else {
+					error_log('GET request failed with response code: ' . $response_code);
+				}
+			}
 		}
 
 		public function event_login(){
 			$subject = isset( $this->settings['event_login']['subject'] ) ? $this->settings['event_login']['subject'] : 'default';
 			$message = isset( $this->settings['event_login']['message'] ) ? $this->settings['event_login']['message'] : 'default';
-			$this->publish( $subject, $message );
+			// $this->publish( $subject, $message );
 		}
 
 		public function event_login_failed(){
 			$subject = isset( $this->settings['event_login_failed']['subject'] ) ? $this->settings['event_login_failed']['subject'] : 'default';
 			$message = isset( $this->settings['event_login_failed']['message'] ) ? $this->settings['event_login_failed']['message'] : 'default';
-			$this->publish( $subject, $message );
+			// $this->publish( $subject, $message );
 		}
 
 		public function event_new_post( $id, $post ){
@@ -193,7 +222,7 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 			$message = isset( $this->settings['event_new_post']['message'] ) ? $this->settings['event_new_post']['message'] : 'default';
 			// replace some placeholders with actual content
 			$message = $this->replace_post_placeholders( $message, $post );
-			$this->publish( $subject, $message );
+			// $this->publish( $subject, $message );
 		}
 
 		public function event_new_page( $id, $post ){
@@ -201,7 +230,7 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 			$message = isset( $this->settings['event_new_page']['message'] ) ? $this->settings['event_new_page']['message'] : 'default';
 			// replace some placeholders with actual content
 			$message = $this->replace_post_placeholders( $message, $post );
-			$this->publish( $subject, $message );
+			// $this->publish( $subject, $message );
 		}
 
 		public function event_new_comment( $id, $comment ){
@@ -209,7 +238,7 @@ if( !class_exists('LED_SITE_INDICATOR') ){
 			$message = isset( $this->settings['event_new_comment']['message'] ) ? $this->settings['event_new_comment']['message'] : 'default';
 			// replace some placeholders with actual content
 			$message = $this->replace_comment_placeholders( $message, $comment );
-			$this->publish( $subject, $message );
+			// $this->publish( $subject, $message );
 		}
 
 
