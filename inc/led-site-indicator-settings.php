@@ -67,14 +67,14 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 
 			add_settings_section(
 				'led_site_indicator_broker_settings', // ID
-				__( 'Broker settings', 'led-site-indicator' ), // Title
+				__( '', 'led-site-indicator' ), // Title
 				array( $this, 'print_broker_section_info' ), // Callback
 				'led-site-indicator-settings' // Page
 			);
 
 			add_settings_section(
 				'led_site_indicator_event_settings', // ID
-				__( 'MQTT topic - default is user/LED for free version', 'led-site-indicator' ), // Title
+				__( 'LED Colour - use LED for free version. <br> Options: RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE', 'led-site-indicator' ), // Title
 				array( $this, 'print_event_section_info' ), // Callback
 				'led-site-indicator-settings' // Page
 			);
@@ -87,10 +87,10 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 			// );
 
 			$this->fields = array(
-				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_url', 'label'=>__('Broker URL', 'led-site-indicator' ), 'callback'=>'broker_url_callback' ),
-				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_port', 'label'=>__('Broker Port', 'led-site-indicator' ), 'callback'=>'broker_port_callback' ),
-				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_qos', 'label'=>__('QoS', 'led-site-indicator' ), 'callback'=>'broker_qos_callback' ),
-				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_client_id', 'label'=>__('Client ID', 'led-site-indicator' ), 'callback'=>'broker_client_id_callback' ),
+				// array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_url', 'label'=>__('Broker URL', 'led-site-indicator' ), 'callback'=>'broker_url_callback' ),
+				// array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_port', 'label'=>__('Broker Port', 'led-site-indicator' ), 'callback'=>'broker_port_callback' ),
+				// array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_qos', 'label'=>__('QoS', 'led-site-indicator' ), 'callback'=>'broker_qos_callback' ),
+				// array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_client_id', 'label'=>__('Client ID', 'led-site-indicator' ), 'callback'=>'broker_client_id_callback' ),
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_username', 'label'=>__('Username', 'led-site-indicator' ), 'callback'=>'broker_username_callback' ),
 				array( 'section'=>'led_site_indicator_broker_settings', 'id'=>'broker_password', 'label'=>__('Password', 'led-site-indicator' ), 'callback'=>'broker_password_callback' ),
 				array( 'section'=>'led_site_indicator_event_settings', 'id'=>'event_pageview', 'label'=>__('Colour', 'led-site-indicator' ), 'callback'=>'event_callback' ),
@@ -135,9 +135,9 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 				$new_input['broker_port'] = max( min( intval( $input['broker_port'] ), 65535 ), 0 );
 			}
 
-			if( isset( $input['broker_qos'] ) ){
-				$new_input['broker_qos'] = max( min( intval( $input['broker_qos'] ), 2 ), 0 );
-			}
+			// if( isset( $input['broker_qos'] ) ){
+			// 	$new_input['broker_qos'] = max( min( intval( $input['broker_qos'] ), 2 ), 0 );
+			// }
 
 			if( isset( $input['broker_client_id'] ) ){
 				$new_input['broker_client_id'] = sanitize_text_field( $input['broker_client_id'] );
@@ -190,14 +190,14 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		 * Print the Section text
 		 */
 		public function print_broker_section_info(){
-			print __( 'Please provide information about the MQTT broker you want to connect to:', 'led-site-indicator' );
+			// print __( 'Please provide information about the MQTT broker you want to connect to:', 'led-site-indicator' );
 		}
 
 		/** 
 		 * Print the Section text
 		 */
 		public function print_event_section_info(){
-			print __( 'MQTT password and colour input', 'led-site-indicator' );
+			print __( '', 'led-site-indicator' );
 		}
 
 		/** 
@@ -226,19 +226,19 @@ if( !class_exists('LED_SITE_INDICATOR_Settings') ){
 		/** 
 		 * Callback for the broker QoS setting
 		 */
-		function broker_qos_callback() { 
-			$current_setting = isset( $this->current_settings['broker_qos'] ) ? $this->current_settings['broker_qos'] : 1;
-			$qos_options = array(
-				array( 'value' => 0, 'label' => '0 - At most once' ),
-				array( 'value' => 1, 'label' => '1 - At least once' ),
-				array( 'value' => 2, 'label' => '2 - Exactly once' ),
-			);
-			echo '<select id="broker_qos" name="led_site_indicator_settings[broker_qos]" >';
-			foreach( $qos_options as $qos ){
-				echo '<option value="' . esc_attr ($qos['value']) . '" ' . selected( esc_attr ($qos['value']) , esc_attr ($current_setting) , false ) . '>' . esc_attr ($qos['label']) . '</option>';
-			}
-			echo '</select>';
-		}
+		// function broker_qos_callback() { 
+		// 	$current_setting = isset( $this->current_settings['broker_qos'] ) ? $this->current_settings['broker_qos'] : 1;
+		// 	$qos_options = array(
+		// 		array( 'value' => 0, 'label' => '0 - At most once' ),
+		// 		array( 'value' => 1, 'label' => '1 - At least once' ),
+		// 		array( 'value' => 2, 'label' => '2 - Exactly once' ),
+		// 	);
+		// 	echo '<select id="broker_qos" name="led_site_indicator_settings[broker_qos]" >';
+		// 	foreach( $qos_options as $qos ){
+		// 		echo '<option value="' . esc_attr ($qos['value']) . '" ' . selected( esc_attr ($qos['value']) , esc_attr ($current_setting) , false ) . '>' . esc_attr ($qos['label']) . '</option>';
+		// 	}
+		// 	echo '</select>';
+		// }
 
 		/** 
 		 * Callback for the client ID
