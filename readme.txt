@@ -35,6 +35,12 @@ Colours to choose from are LED, RED, GREEN, BLUE, CYAN, MAGENTA and YELLOW. LED 
 
 
 == Changelog ==
+= 2.0.2 =
+2023-10-23
+Updated Settings.
+Updated Screenshot.
+Removed more old unused MQTT code. 
+
 = 2.0 =
 2023-10-12
 Removed phpMQTT dependency due to some WordPress servers blocking port 1883
