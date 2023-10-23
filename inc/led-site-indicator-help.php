@@ -75,7 +75,7 @@ if( !class_exists('LED_SITE_INDICATOR_Help') ){
 			$screen->set_help_sidebar(
 				'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
 				'<a href="https://ledindicator.devsoft.co.za/learn" target="_blank">' . __( 'LED Site Indicator learning', 'led-site-indicator' ) . '</a><br />' .
-				'<p><a href="http://wordpress.org/support/" target="_blank">' . __( 'WordPress Support Forums', 'led-site-indicator' ) . '</a><br />' .
+				'<p><a href="http://wordpress.org/support/" target="_blank">' . __( 'WordPress Support Forums', 'led-site-indicator' ) . '</a><br />' 
 				// '<a href="http://mqtt.org" target="_blank">' . __( 'MQTT.org', 'led-site-indicator' ) . '</a><br />' .
 				// '<a href="http://mqtt.org/faq" target="_blank">' . __( 'MQTT.org FAQ', 'led-site-indicator' ) . '</a></p>'
 			);
